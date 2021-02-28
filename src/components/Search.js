@@ -1,15 +1,28 @@
 import React, { useState } from "react";
 import { Form, Button, Col, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Spring } from "react-spring/renderprops";
-import { GoSearch } from "react-icons/go";
+import { connect } from "react-redux";
 import { FaCocktail } from "react-icons/fa";
 import { IoFastFoodOutline } from "react-icons/io5";
 import { GiPartyPopper } from "react-icons/gi";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useHistory } from "react-router-dom";
+import { searchFilter } from "../Redux/Actions/Restaurants";
 
-const Search = ({ handleSearch }) => {
+const Search = (props) => {
   const [startDate, setStartDate] = useState(new Date());
+  let history = useHistory();
+  const handleSearch = (e) => {
+    // e.target["date-picker"].value;
+    // e.target.casual.value;
+    // e.target.area.value;
+    // e.nativeEvent.submitter.value
+    // debugger;
+    e.preventDefault();
+    console.log(e);
+    props.filter(e);
+  };
   return (
     <Spring
       from={{ opacity: 0 }}
@@ -18,7 +31,7 @@ const Search = ({ handleSearch }) => {
     >
       {(props) => (
         <div style={props}>
-          <Form onSubmit={handleSearch}>
+          <Form onSubmit={(e) => (handleSearch(e), history.push("/results"))}>
             <Form.Row className="align-items-center">
               <Col className="mt-0" xs="auto">
                 <DatePicker
@@ -46,7 +59,7 @@ const Search = ({ handleSearch }) => {
                 >
                   <option value="0">Choose...</option>
                   <option value="true">Casual</option>
-                  <option value="false">Special Occassion</option>
+                  <option value="">Special Occassion</option>
                 </Form.Control>
               </Col>
               <Col xs="auto" className="my-1">
@@ -71,11 +84,11 @@ const Search = ({ handleSearch }) => {
                   <option value="Nob Hill">Nob Hill</option>
                 </Form.Control>
               </Col>
-              <Col xs="auto" className="my-1">
+              {/* <Col xs="auto" className="my-1">
                 <Button type="submit">
                   <GoSearch />
                 </Button>
-              </Col>
+              </Col> */}
             </Form.Row>
             <Form.Row>
               <Col className="mt-2 d-flex flex-row-reverse">
@@ -84,11 +97,16 @@ const Search = ({ handleSearch }) => {
                   overlay={
                     <Tooltip id={`tooltip-bottom`}>
                       Select for options of great food places in your area of
-                      choice
+                      choice <br />
+                      {"(click these buttons to submit search)"}
                     </Tooltip>
                   }
                 >
-                  <Button variant="light outline-dark">
+                  <Button
+                    variant="light outline-dark"
+                    type="submit"
+                    value="food"
+                  >
                     <IoFastFoodOutline />
                   </Button>
                 </OverlayTrigger>
@@ -99,11 +117,16 @@ const Search = ({ handleSearch }) => {
                   overlay={
                     <Tooltip id={`tooltip-bottom`}>
                       Select for the best options to get a drink in your
-                      selected area
+                      selected area <br />
+                      {"(click these buttons to submit search)"}
                     </Tooltip>
                   }
                 >
-                  <Button variant="light outline-dark">
+                  <Button
+                    variant="light outline-dark"
+                    type="submit"
+                    value="drink"
+                  >
                     <FaCocktail />
                   </Button>
                 </OverlayTrigger>
@@ -113,11 +136,16 @@ const Search = ({ handleSearch }) => {
                   placement="bottom"
                   overlay={
                     <Tooltip id={`tooltip-bottom`}>
-                      Check out the best events going on in your area
+                      Check out the best events going on in your area <br />
+                      {"(click these buttons to submit search)"}
                     </Tooltip>
                   }
                 >
-                  <Button variant="light outline-dark">
+                  <Button
+                    variant="light outline-dark"
+                    type="submit"
+                    value="event"
+                  >
                     <GiPartyPopper />
                   </Button>
                 </OverlayTrigger>
@@ -129,4 +157,10 @@ const Search = ({ handleSearch }) => {
     </Spring>
   );
 };
-export default Search;
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    filter: (filters) => dispatch(searchFilter(filters)),
+  };
+};
+export default connect(null, mapDispatchToProps)(Search);

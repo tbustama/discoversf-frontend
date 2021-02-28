@@ -11,12 +11,19 @@ body {
   background-size: cover;
   max-height: 100vh;
   max-width: 100%;
+  color: white;
+  overflow-y: hidden;
+  overflow-x: visible;
 }
 .App {
   align-items: center;
   min-height: 100vh;
   display: grid;
   justify-content: center;
+}
+.main {
+  min-height: 100vh;
+  display: grid;
 }
 .landing-screen {
   justify-content: top;
@@ -29,4 +36,131 @@ h1 {
 
 .search-bar {
   position: relative;
+}
+
+#search-container {
+  margin-top: 15vh;
+  overflow-x: visible;
+}
+#sign-up {
+  margin-top: 20vh;
+  /* max-width: 50%; */
+  justify-content: center;
+}
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0);
+
+  z-index: 1;
+  padding: 5%;
+  /* margin-bottom: 30px; */
+}
+.netflix-card {
+  background: whitesmoke;
+  overflow-y: visible;
+  overflow-x: hidden;
+}
+
+.netflix-card > .card-image {
+  transform: scale(1, 0.8);
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+}
+
+.netflix-card:hover > .card-image {
+  top: -24px;
+  left: -163px;
+  transform: scale(0.56, 0.5);
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+}
+
+.card-img-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgb(0, 0, 0, 0);
+  border-radius: calc(0.25rem - 1px);
+}
+
+.netflix-card:hover > .card-img-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgb(0, 0, 0, 0.3);
+  border-radius: calc(0.25rem - 1px);
+}
+
+.card-img-overlay:hover * {
+  opacity: 1;
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+}
+
+.card-title {
+  opacity: 1;
+  color: white;
+  font-size: 20pt;
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+}
+
+.card-text {
+  padding: 5%;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12pt;
+  line-height: 20px;
+
+  opacity: 0;
+}
+#card-container {
+  /* overflow-y: scroll; */
+  overflow-x: visible;
+  max-height: 120vh;
+  background-color: rgb(48, 46, 46);
+  border-radius: 25px;
+}
+
+#results-col {
+  position: relative;
+  padding-right: 0%;
+  max-height: 85vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  z-index: 10;
+  border: 15px;
+}
+
+#results-row {
+  max-height: 70%;
+}
+
+#user-title {
+  color: black;
+}
+#user-card {
+  color: black;
+  opacity: 1;
+  padding-top: 0px;
 }
