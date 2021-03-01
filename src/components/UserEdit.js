@@ -29,7 +29,7 @@ const UserEdit = (props) => {
       .then((r) => r.json())
       .then((user) => {
         user.user && props.login(user.user);
-        user.user ? history.push("/") : alert("Username already taken");
+        user.user ? history.push("/userpage") : alert("Username already taken");
       });
   };
   console.log(props);

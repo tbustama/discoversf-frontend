@@ -43,14 +43,15 @@ const Cards = (props) => {
                 <br></br>
                 <br></br>
                 <p>
-                  {props.restaurant.users[0].username}
+                  {props.restaurant.users.length > 0 &&
+                    props.restaurant.users[0].username}
                   {props.restaurant.users.length > 1
                     ? ` and ${
                         props.restaurant.users.length - 1
                       } others are going`
                     : " is going"}
                 </p>
-                <br></br>
+
                 <a
                   target="_blank"
                   rel="noreferrer"

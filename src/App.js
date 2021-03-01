@@ -74,7 +74,7 @@ class App extends React.Component {
                 <Row id="results-row">
                   <Col xs={6} md={4} id="results-col2">
                     {this.props.filters &&
-                      `The best
+                      `Our favorite
                     ${
                       this.props.filters.nativeEvent.submitter.value == "food"
                         ? "places to get dinner"
