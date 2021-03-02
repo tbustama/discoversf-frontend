@@ -6,15 +6,22 @@ import reportWebVitals from "./reportWebVitals";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import { rootReducer } from "./Redux/Recuders/Index";
+import { ActionCableProvider } from "react-actioncable-provider";
+const channels = require.context(".", true, /_channel\.js$/);
+channels.keys().forEach(channels);
 
+const API_WS_ROOT = "ws://localhost:3000/cable";
 const store = createStore(
   rootReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
+console.log(store);
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <ActionCableProvider url={API_WS_ROOT}>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </ActionCableProvider>,
   document.getElementById("root")
 );
 

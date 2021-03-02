@@ -19,6 +19,9 @@ const NavBar = (props) => {
       <Navbar.Collapse className="justify-content-end">
         {props.user ? (
           <>
+            <LinkContainer to="/forum" style={{ color: "white" }}>
+              <Nav.Link>Forum</Nav.Link>
+            </LinkContainer>
             <LinkContainer to="/userpage" style={{ color: "white" }}>
               <Nav.Link>Profile</Nav.Link>
             </LinkContainer>

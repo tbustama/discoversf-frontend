@@ -28,9 +28,14 @@ const SignUp = (props) => {
     })
       .then((r) => r.json())
       .then((user) => {
+        console.log(user);
         user.user && props.login(user.user);
         user.user && localStorage.setItem("token", user.jwt);
-        user.user ? history.push("/") : alert("Username already taken");
+        user.user
+          ? history.push("/")
+          : alert(
+              "Failed to create user. Either username already taken or not all fields were completed"
+            );
       });
   };
   console.log(props);
