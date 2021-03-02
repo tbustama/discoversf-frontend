@@ -12,7 +12,7 @@ body {
   max-height: 100vh;
   max-width: 100%;
   color: white;
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
   overflow-x: visible;
 }
 .App {
@@ -45,6 +45,8 @@ h1 {
 #sign-up {
   margin-top: 20vh;
   /* max-width: 50%; */
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.4);
   justify-content: center;
 }
 .card {
@@ -165,4 +167,9 @@ h1 {
   color: black;
   opacity: 1;
   padding-top: 0px;
+}
+
+.conversationsList {
+  background: rgba(48, 46, 46, 0.75);
+  border-radius: 10px;
 }

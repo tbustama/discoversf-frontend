@@ -15,6 +15,7 @@ import CardsContainer from "./containers/CardsContainer";
 import { fetchRestaurants } from "./Redux/Actions/Restaurants";
 import UserCard from "./components/UserCard";
 import UserEdit from "./components/UserEdit";
+import ConversationsList from "./components/Messaging/ConversationsList";
 class App extends React.Component {
   persistUser = (token) => {
     fetch("http://localhost:3000/api/v1/profile", {
@@ -61,6 +62,16 @@ class App extends React.Component {
               ) : (
                 <LandingPage />
               )}
+            </div>
+          )}
+        />
+        <Route
+          exact
+          path="/forum"
+          render={() => (
+            <div className="App">
+              <NavBar />
+              <ConversationsList />
             </div>
           )}
         />
