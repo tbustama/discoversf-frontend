@@ -1,6 +1,7 @@
 import React from "react";
-import { Card, Button, Row, Col } from "react-bootstrap";
-import { addLike } from "../Redux/Actions/Restaurants";
+import { Card, Button, Row, Col, Nav } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import { addLike, resultUsers } from "../Redux/Actions/Restaurants";
 import { connect } from "react-redux";
 const Cards = (props) => {
   const createLike = (user, restaurant) => {
@@ -20,10 +21,15 @@ const Cards = (props) => {
       .then((r) => r.json())
       .then((restaurant) => props.like(restaurant));
   };
-  console.log(props);
   return (
     <>
-      <Card className="netflix-card bg-dark rounded">
+      <Card
+        className="restaurant-card bg-dark rounded"
+        id="restaurant"
+        onClick={({ target }) =>
+          target.closest("#restaurant").classList.toggle("active")
+        }
+      >
         <Card.Img
           src={props.restaurant.img_url}
           alt="card-image hello"
@@ -42,26 +48,34 @@ const Cards = (props) => {
                 {props.restaurant.description}
                 <br></br>
                 <br></br>
-                <p>
-                  {props.restaurant.users.length > 0 &&
-                    `${props.restaurant.users[0].username}`}
-                  {props.restaurant.users.length > 1 &&
-                    ` and ${
-                      props.restaurant.users.length - 1
-                    } others are going`}
-                  {props.restaurant.users.length == 1 && " is going"}
-                </p>
+                <LinkContainer
+                  to="/results/people"
+                  style={{ textAlign: "center" }}
+                >
+                  <Nav.Link
+                    onClick={() => props.userShow(props.restaurant.users)}
+                  >
+                    {props.restaurant.users.length > 0 &&
+                      `${props.restaurant.users[0].username}`}
+                    {props.restaurant.users.length > 1 &&
+                      ` and ${
+                        props.restaurant.users.length - 1
+                      } others are going`}
+                    {props.restaurant.users.length == 1 && " is going"}
+                  </Nav.Link>
+                </LinkContainer>
 
-                <a
+                <Nav.Link
                   target="_blank"
-                  rel="noreferrer"
                   href={props.restaurant.yelp_url}
+                  style={{ marginLeft: "30%" }}
                 >
                   Yelp Link
-                </a>
-                <br></br>
+                </Nav.Link>
+
                 {props.user && (
                   <Button
+                    style={{ marginLeft: "35%" }}
                     onClick={() => createLike(props.user, props.restaurant)}
                   >
                     Like
@@ -81,6 +95,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     like: (like) => dispatch(addLike(like)),
+    userShow: (users) => dispatch(resultUsers(users)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Cards);

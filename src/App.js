@@ -16,6 +16,8 @@ import { fetchRestaurants } from "./Redux/Actions/Restaurants";
 import UserCard from "./components/UserCard";
 import UserEdit from "./components/UserEdit";
 import ConversationsList from "./components/Messaging/ConversationsList";
+import UserResultsContainer from "./containers/UserResultsContainer";
+import MapView from "./components/MapView";
 class App extends React.Component {
   persistUser = (token) => {
     fetch("http://localhost:3000/api/v1/profile", {
@@ -65,6 +67,7 @@ class App extends React.Component {
             </div>
           )}
         />
+
         <Route
           exact
           path="/forum"
@@ -75,6 +78,7 @@ class App extends React.Component {
             </div>
           )}
         />
+
         <Route
           exact
           path="/results"
@@ -84,7 +88,7 @@ class App extends React.Component {
               <Container id="search-container">
                 <Row id="results-row">
                   <Col xs={6} md={4} id="results-col2">
-                    <h3
+                    {/* <h3
                       style={{
                         background: "rgba(48,46,46,0.6)",
                         borderRadius: "5px",
@@ -103,7 +107,14 @@ class App extends React.Component {
                         : " for a special occassion"
                     }
                     in the ${this.props.filters.target.area.value} district`}
-                    </h3>
+                    </h3> */}
+                    <MapView
+                      isMarkerShown
+                      googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+                      loadingElement={<div style={{ height: `100%` }} />}
+                      containerElement={<div style={{ height: `400px` }} />}
+                      mapElement={<div style={{ height: `100%` }} />}
+                    />
                   </Col>
                   <Col xs={12} md={8} id="results-col">
                     <CardsContainer />
@@ -113,6 +124,18 @@ class App extends React.Component {
             </div>
           )}
         />
+
+        <Route
+          exact
+          path="/results/people"
+          render={() => (
+            <>
+              <NavBar />
+              <UserResultsContainer />
+            </>
+          )}
+        />
+
         <Route
           exact
           path="/home"
@@ -123,6 +146,7 @@ class App extends React.Component {
             </div>
           )}
         />
+
         <Route
           exact
           path="/signup"
@@ -143,6 +167,7 @@ class App extends React.Component {
             </>
           )}
         />
+
         <Route
           exact
           path="/userpage"
@@ -152,6 +177,7 @@ class App extends React.Component {
             </div>
           )}
         />
+
         <Route
           exact
           path="/userpage/edit"
@@ -172,6 +198,7 @@ const mapStateToProps = (state) => {
     user: state.UserLogIn.user,
     restaurants: state.RestaurantReducer.restaurants,
     filters: state.RestaurantReducer.filterString,
+    resultUsers: state.RestaurantReducer.resultUsers,
   };
 };
 const mapDispatchToProps = (dispatch) => {

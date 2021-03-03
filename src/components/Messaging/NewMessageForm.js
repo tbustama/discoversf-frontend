@@ -51,7 +51,7 @@ class NewMessageForm extends React.Component {
             />
             <InputGroup.Append>
               <Button variant="outline-light" type="submit">
-                Submit
+                Send
               </Button>
             </InputGroup.Append>
           </InputGroup>

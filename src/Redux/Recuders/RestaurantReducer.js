@@ -2,9 +2,11 @@ const initialState = {
   restaurants: [],
   filteredRestaurants: [],
   filterString: false,
+  resultUsers: [],
 };
 
 const RestaurantReducer = (state = initialState, action) => {
+  console.log(action.payload);
   switch (action.type) {
     case "FETCH": {
       return {
@@ -50,6 +52,12 @@ const RestaurantReducer = (state = initialState, action) => {
         ...state,
         filterString: action.payload,
         filteredRestaurants: filresy,
+      };
+    }
+    case "USERS": {
+      return {
+        ...state,
+        resultUsers: action.payload,
       };
     }
     default:

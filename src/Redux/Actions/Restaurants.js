@@ -18,3 +18,10 @@ export const searchFilter = (filters) => {
     payload: filters,
   };
 };
+
+export const resultUsers = (users) => {
+  return {
+    type: "USERS",
+    payload: users,
+  };
+};

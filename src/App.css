@@ -62,13 +62,13 @@ h1 {
   padding: 5%;
   /* margin-bottom: 30px; */
 }
-.netflix-card {
+.restaurant-card {
   background: whitesmoke;
   overflow-y: visible;
   overflow-x: hidden;
 }
 
-.netflix-card > .card-image {
+.restaurant-card > .card-image {
   transform: scale(1, 0.8);
   max-height: 500px;
   /* max-width: 535px; */
@@ -79,7 +79,7 @@ h1 {
   -ms-transition: all 0.5s ease;
 }
 
-.netflix-card:hover > .card-image {
+.active > .card-image {
   top: -24px;
   left: -163px;
   transform: scale(0.56, 0.5);
@@ -100,7 +100,7 @@ h1 {
   border-radius: calc(0.25rem - 1px);
 }
 
-.netflix-card:hover > .card-img-overlay {
+.active > .card-img-overlay {
   position: absolute;
   top: 0;
   right: 0;
@@ -108,9 +108,15 @@ h1 {
   left: 0;
   background: rgb(0, 0, 0, 0.3);
   border-radius: calc(0.25rem - 1px);
+  opacity: 1;
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
 }
 
-.card-img-overlay:hover * {
+.active > .card-img-overlay * {
   opacity: 1;
   transition: all 0.5s ease;
   -webkit-transition: all 0.5s ease;
@@ -135,11 +141,14 @@ h1 {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 11pt;
   line-height: 20px;
-
-  opacity: 0;
+}
+.col > .card-text {
+  visibility: hidden;
+}
+.active > .card-img-overlay > .row > .col > .card-text {
+  visibility: visible;
 }
 #card-container {
-  /* overflow-y: scroll; */
   overflow-x: visible;
   max-height: 120vh;
   background-color: rgb(48, 46, 46);
@@ -167,6 +176,7 @@ h1 {
   color: black;
   opacity: 1;
   padding-top: 0px;
+  padding-left: 0%;
 }
 
 .conversationsList {
@@ -190,4 +200,8 @@ h1 {
 #toasty {
   margin-left: auto;
   margin-right: 0;
+}
+
+#user-result-container {
+  margin-top: 4%;
 }
