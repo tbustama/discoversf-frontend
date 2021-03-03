@@ -24,7 +24,7 @@ const RestaurantReducer = (state = initialState, action) => {
             return restaurant;
           }
         }),
-        filteredRestaurants: restaurants.map((restaurant) => {
+        filteredRestaurants: state.filteredRestaurants.map((restaurant) => {
           if (restaurant.id === action.payload.id) {
             return action.payload;
           } else {

@@ -7,8 +7,6 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import { rootReducer } from "./Redux/Recuders/Index";
 import { ActionCableProvider } from "react-actioncable-provider";
-const channels = require.context(".", true, /_channel\.js$/);
-channels.keys().forEach(channels);
 
 const API_WS_ROOT = "ws://localhost:3000/cable";
 const store = createStore(

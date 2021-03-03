@@ -1,13 +1,17 @@
 import React from "react";
-
+import { InputGroup, FormControl, Button } from "react-bootstrap";
 class NewMessageForm extends React.Component {
   state = {
     text: "",
     conversation_id: this.props.conversation_id,
+    user_id: this.props.user.id,
   };
 
   componentWillReceiveProps = (nextProps) => {
-    this.setState({ conversation_id: nextProps.conversation_id });
+    this.setState({
+      conversation_id: nextProps.conversation_id,
+      user_id: nextProps.user.id,
+    });
   };
 
   handleChange = (e) => {
@@ -15,6 +19,10 @@ class NewMessageForm extends React.Component {
   };
 
   handleSubmit = (e) => {
+    this.setState({
+      ...this.state,
+      user_id: this.props.user.id,
+    });
     e.preventDefault();
     let token = localStorage.token;
     fetch(`http://localhost:3000/messages`, {
@@ -35,12 +43,24 @@ class NewMessageForm extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <label>New Message:</label>
           <br />
-          <input
+          <InputGroup className="mb-3">
+            <FormControl
+              aria-describedby="basic-addon2"
+              value={this.state.text}
+              onChange={this.handleChange}
+            />
+            <InputGroup.Append>
+              <Button variant="outline-light" type="submit">
+                Submit
+              </Button>
+            </InputGroup.Append>
+          </InputGroup>
+          {/* <input
             type="text"
             value={this.state.text}
             onChange={this.handleChange}
           />
-          <input type="submit" />
+          <input type="submit" /> */}
         </form>
       </div>
     );

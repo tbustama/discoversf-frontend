@@ -71,7 +71,7 @@ class App extends React.Component {
           render={() => (
             <div className="App">
               <NavBar />
-              <ConversationsList />
+              <ConversationsList user={this.props.user} />
             </div>
           )}
         />
@@ -84,8 +84,14 @@ class App extends React.Component {
               <Container id="search-container">
                 <Row id="results-row">
                   <Col xs={6} md={4} id="results-col2">
-                    {this.props.filters &&
-                      `Our favorite
+                    <h3
+                      style={{
+                        background: "rgba(48,46,46,0.6)",
+                        borderRadius: "5px",
+                      }}
+                    >
+                      {this.props.filters &&
+                        `Our favorite
                     ${
                       this.props.filters.nativeEvent.submitter.value == "food"
                         ? "places to get dinner"
@@ -97,6 +103,7 @@ class App extends React.Component {
                         : " for a special occassion"
                     }
                     in the ${this.props.filters.target.area.value} district`}
+                    </h3>
                   </Col>
                   <Col xs={12} md={8} id="results-col">
                     <CardsContainer />

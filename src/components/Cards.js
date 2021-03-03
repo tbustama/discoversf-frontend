@@ -44,12 +44,12 @@ const Cards = (props) => {
                 <br></br>
                 <p>
                   {props.restaurant.users.length > 0 &&
-                    props.restaurant.users[0].username}
-                  {props.restaurant.users.length > 1
-                    ? ` and ${
-                        props.restaurant.users.length - 1
-                      } others are going`
-                    : " is going"}
+                    `${props.restaurant.users[0].username}`}
+                  {props.restaurant.users.length > 1 &&
+                    ` and ${
+                      props.restaurant.users.length - 1
+                    } others are going`}
+                  {props.restaurant.users.length == 1 && " is going"}
                 </p>
 
                 <a
