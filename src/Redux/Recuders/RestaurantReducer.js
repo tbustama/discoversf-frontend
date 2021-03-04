@@ -2,9 +2,12 @@ const initialState = {
   restaurants: [],
   filteredRestaurants: [],
   filterString: false,
+  resultUsers: [],
+  mapRestaurant: false,
 };
 
 const RestaurantReducer = (state = initialState, action) => {
+  console.log(action.payload);
   switch (action.type) {
     case "FETCH": {
       return {
@@ -24,7 +27,7 @@ const RestaurantReducer = (state = initialState, action) => {
             return restaurant;
           }
         }),
-        filteredRestaurants: restaurants.map((restaurant) => {
+        filteredRestaurants: state.filteredRestaurants.map((restaurant) => {
           if (restaurant.id === action.payload.id) {
             return action.payload;
           } else {
@@ -50,6 +53,18 @@ const RestaurantReducer = (state = initialState, action) => {
         ...state,
         filterString: action.payload,
         filteredRestaurants: filresy,
+      };
+    }
+    case "USERS": {
+      return {
+        ...state,
+        resultUsers: action.payload,
+      };
+    }
+    case "MAPRESTAURANT": {
+      return {
+        ...state,
+        mapRestaurant: action.payload,
       };
     }
     default:

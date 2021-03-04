@@ -1,6 +1,5 @@
 import React from "react";
 import { ActionCable } from "react-actioncable-provider";
-
 import NewConversationForm from "./NewConversationForm";
 import MessagesArea from "./MessagesArea";
 import Cable from "./Cable";
@@ -38,7 +37,7 @@ class ConversationsList extends React.Component {
     this.setState({ conversations });
   };
 
-  render = () => {
+  render = (props) => {
     const { conversations, activeConversation } = this.state;
     return (
       <div className="conversationsList" style={{ display: "flex" }}>
@@ -53,7 +52,7 @@ class ConversationsList extends React.Component {
           />
         ) : null}
         <div style={{ flex: "auto" }}>
-          <h2>Conversations</h2>
+          <h2>Threads</h2>
           <ul>
             {mapConversations(this.state.conversations, this.handleClick)}
           </ul>
@@ -65,6 +64,7 @@ class ConversationsList extends React.Component {
               conversations,
               activeConversation
             )}
+            user={this.props.user}
             style={{ flex: "auto" }}
           />
         ) : null}

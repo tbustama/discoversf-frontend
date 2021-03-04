@@ -37,7 +37,6 @@ const Search = (props) => {
                 <DatePicker
                   selected={startDate}
                   onChange={(date) => setStartDate(date)}
-                  isClearable
                   placeholderText="Choose a date"
                   name="date-picker"
                 />

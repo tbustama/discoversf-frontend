@@ -16,6 +16,8 @@ import { fetchRestaurants } from "./Redux/Actions/Restaurants";
 import UserCard from "./components/UserCard";
 import UserEdit from "./components/UserEdit";
 import ConversationsList from "./components/Messaging/ConversationsList";
+import UserResultsContainer from "./containers/UserResultsContainer";
+import MapView from "./components/MapView";
 class App extends React.Component {
   persistUser = (token) => {
     fetch("http://localhost:3000/api/v1/profile", {
@@ -65,16 +67,18 @@ class App extends React.Component {
             </div>
           )}
         />
+
         <Route
           exact
           path="/forum"
           render={() => (
             <div className="App">
               <NavBar />
-              <ConversationsList />
+              <ConversationsList user={this.props.user} />
             </div>
           )}
         />
+
         <Route
           exact
           path="/results"
@@ -83,9 +87,15 @@ class App extends React.Component {
               <NavBar />
               <Container id="search-container">
                 <Row id="results-row">
-                  <Col xs={6} md={4} id="results-col2">
-                    {this.props.filters &&
-                      `Our favorite
+                  <Col xs={6} md={6} id="results-col2">
+                    {/* <h3
+                      style={{
+                        background: "rgba(48,46,46,0.6)",
+                        borderRadius: "5px",
+                      }}
+                    >
+                      {this.props.filters &&
+                        `Our favorite
                     ${
                       this.props.filters.nativeEvent.submitter.value == "food"
                         ? "places to get dinner"
@@ -97,8 +107,18 @@ class App extends React.Component {
                         : " for a special occassion"
                     }
                     in the ${this.props.filters.target.area.value} district`}
+                    </h3> */}
+                    <MapView
+                      isMarkerShown
+                      googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`}
+                      loadingElement={<div style={{ height: `100%` }} />}
+                      containerElement={<div style={{ height: `500px` }} />}
+                      mapElement={
+                        <div style={{ height: `100%`, borderRadius: "6px" }} />
+                      }
+                    />
                   </Col>
-                  <Col xs={12} md={8} id="results-col">
+                  <Col xs={12} md={6} id="results-col">
                     <CardsContainer />
                   </Col>
                 </Row>
@@ -106,6 +126,18 @@ class App extends React.Component {
             </div>
           )}
         />
+
+        <Route
+          exact
+          path="/results/people"
+          render={() => (
+            <div class="contained">
+              <NavBar />
+              <UserResultsContainer />
+            </div>
+          )}
+        />
+
         <Route
           exact
           path="/home"
@@ -116,6 +148,7 @@ class App extends React.Component {
             </div>
           )}
         />
+
         <Route
           exact
           path="/signup"
@@ -136,6 +169,7 @@ class App extends React.Component {
             </>
           )}
         />
+
         <Route
           exact
           path="/userpage"
@@ -145,6 +179,7 @@ class App extends React.Component {
             </div>
           )}
         />
+
         <Route
           exact
           path="/userpage/edit"
@@ -165,6 +200,7 @@ const mapStateToProps = (state) => {
     user: state.UserLogIn.user,
     restaurants: state.RestaurantReducer.restaurants,
     filters: state.RestaurantReducer.filterString,
+    resultUsers: state.RestaurantReducer.resultUsers,
   };
 };
 const mapDispatchToProps = (dispatch) => {

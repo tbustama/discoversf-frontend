@@ -18,3 +18,17 @@ export const searchFilter = (filters) => {
     payload: filters,
   };
 };
+
+export const resultUsers = (users) => {
+  return {
+    type: "USERS",
+    payload: users,
+  };
+};
+
+export const selectRestaurant = (restaurant) => {
+  return {
+    type: "MAPRESTAURANT",
+    payload: restaurant,
+  };
+};
