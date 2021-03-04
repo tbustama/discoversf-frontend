@@ -41,6 +41,7 @@ h1 {
 #search-container {
   margin-top: 15vh;
   overflow-x: visible;
+  min-width: 90%;
 }
 #sign-up {
   margin-top: 20vh;
@@ -172,7 +173,7 @@ h1 {
 #user-title {
   color: black;
 }
-#user-card {
+.user-card {
   color: black;
   opacity: 1;
   padding-top: 0px;
@@ -203,5 +204,30 @@ h1 {
 }
 
 #user-result-container {
-  margin-top: 4%;
+  margin-top: 5%;
+  height: 90vh;
+}
+
+.navbar {
+  z-index: 100;
+}
+
+#result-users {
+  max-width: 50%;
+  max-height: 20%;
+  padding: 1%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.contained {
+  overflow-y: auto;
+}
+
+#result-users-body {
+  padding: 0% 0% 0% 1%;
+}
+
+#rounded-button {
+  border-radius: 30px;
 }

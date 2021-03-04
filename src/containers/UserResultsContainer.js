@@ -1,11 +1,11 @@
 import { connect } from "react-redux";
-
+import UserCard from "../components/OtherUserCard";
 const UsersContainer = (props) => {
   return (
     <div id="user-result-container">
-      {props.resultUsers.map((user) => (
-        <h1>{user.full_name}</h1>
-      ))}
+      {props.resultUsers.map((user) => {
+        return <UserCard user={user} />;
+      })}
     </div>
   );
 };

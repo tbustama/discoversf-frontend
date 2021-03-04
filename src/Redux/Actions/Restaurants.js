@@ -25,3 +25,10 @@ export const resultUsers = (users) => {
     payload: users,
   };
 };
+
+export const selectRestaurant = (restaurant) => {
+  return {
+    type: "MAPRESTAURANT",
+    payload: restaurant,
+  };
+};

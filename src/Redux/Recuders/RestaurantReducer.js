@@ -3,6 +3,7 @@ const initialState = {
   filteredRestaurants: [],
   filterString: false,
   resultUsers: [],
+  mapRestaurant: false,
 };
 
 const RestaurantReducer = (state = initialState, action) => {
@@ -58,6 +59,12 @@ const RestaurantReducer = (state = initialState, action) => {
       return {
         ...state,
         resultUsers: action.payload,
+      };
+    }
+    case "MAPRESTAURANT": {
+      return {
+        ...state,
+        mapRestaurant: action.payload,
       };
     }
     default:

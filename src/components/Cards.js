@@ -1,8 +1,13 @@
 import React from "react";
 import { Card, Button, Row, Col, Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { addLike, resultUsers } from "../Redux/Actions/Restaurants";
+import {
+  addLike,
+  resultUsers,
+  selectRestaurant,
+} from "../Redux/Actions/Restaurants";
 import { connect } from "react-redux";
+
 const Cards = (props) => {
   const createLike = (user, restaurant) => {
     fetch("http://localhost:3000/reservations", {
@@ -21,14 +26,18 @@ const Cards = (props) => {
       .then((r) => r.json())
       .then((restaurant) => props.like(restaurant));
   };
+
   return (
     <>
       <Card
         className="restaurant-card bg-dark rounded"
         id="restaurant"
-        onClick={({ target }) =>
-          target.closest("#restaurant").classList.toggle("active")
-        }
+        onClick={({ target }) => (
+          target.closest("#restaurant").classList.toggle("active"),
+          target.closest("#restaurant").classList.contains("active")
+            ? props.selectedRestaurant(props.restaurant)
+            : props.selectedRestaurant(false)
+        )}
       >
         <Card.Img
           src={props.restaurant.img_url}
@@ -75,7 +84,7 @@ const Cards = (props) => {
 
                 {props.user && (
                   <Button
-                    style={{ marginLeft: "35%" }}
+                    style={{ marginLeft: "35%", borderRadius: "10px" }}
                     onClick={() => createLike(props.user, props.restaurant)}
                   >
                     Like
@@ -90,12 +99,16 @@ const Cards = (props) => {
   );
 };
 const mapStateToProps = (state) => {
-  return { restaurants: state.RestaurantReducer.restaurants };
+  return {
+    restaurants: state.RestaurantReducer.restaurants,
+    mapRestaurant: state.RestaurantReducer.mapRestaurant,
+  };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     like: (like) => dispatch(addLike(like)),
     userShow: (users) => dispatch(resultUsers(users)),
+    selectedRestaurant: (restaurant) => dispatch(selectRestaurant(restaurant)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Cards);

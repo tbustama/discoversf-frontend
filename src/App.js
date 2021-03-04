@@ -87,7 +87,7 @@ class App extends React.Component {
               <NavBar />
               <Container id="search-container">
                 <Row id="results-row">
-                  <Col xs={6} md={4} id="results-col2">
+                  <Col xs={6} md={6} id="results-col2">
                     {/* <h3
                       style={{
                         background: "rgba(48,46,46,0.6)",
@@ -110,13 +110,15 @@ class App extends React.Component {
                     </h3> */}
                     <MapView
                       isMarkerShown
-                      googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+                      googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`}
                       loadingElement={<div style={{ height: `100%` }} />}
-                      containerElement={<div style={{ height: `400px` }} />}
-                      mapElement={<div style={{ height: `100%` }} />}
+                      containerElement={<div style={{ height: `500px` }} />}
+                      mapElement={
+                        <div style={{ height: `100%`, borderRadius: "6px" }} />
+                      }
                     />
                   </Col>
-                  <Col xs={12} md={8} id="results-col">
+                  <Col xs={12} md={6} id="results-col">
                     <CardsContainer />
                   </Col>
                 </Row>
@@ -129,10 +131,10 @@ class App extends React.Component {
           exact
           path="/results/people"
           render={() => (
-            <>
+            <div class="contained">
               <NavBar />
               <UserResultsContainer />
-            </>
+            </div>
           )}
         />
 
