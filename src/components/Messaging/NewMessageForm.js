@@ -1,5 +1,6 @@
 import React from "react";
 import { InputGroup, FormControl, Button } from "react-bootstrap";
+import { GiSuspensionBridge } from "react-icons/gi";
 class NewMessageForm extends React.Component {
   state = {
     text: "",
@@ -41,17 +42,21 @@ class NewMessageForm extends React.Component {
     return (
       <div className="newMessageForm">
         <form onSubmit={this.handleSubmit}>
-          <label>New Message:</label>
-          <br />
-          <InputGroup className="mb-3">
+          <InputGroup className="mb-3 " style={{ padding: "0px 20px" }}>
             <FormControl
+              className="message__form"
               aria-describedby="basic-addon2"
               value={this.state.text}
               onChange={this.handleChange}
+              placeholder="tMessage"
             />
             <InputGroup.Append>
-              <Button variant="outline-light" type="submit">
-                Send
+              <Button
+                variant="outline-light"
+                type="submit"
+                style={{ borderRadius: "0px 25px 25px 0px" }}
+              >
+                <GiSuspensionBridge />
               </Button>
             </InputGroup.Append>
           </InputGroup>

@@ -3,15 +3,22 @@ import { ActionCable } from "react-actioncable-provider";
 import NewConversationForm from "./NewConversationForm";
 import MessagesArea from "./MessagesArea";
 import Cable from "./Cable";
-
-class ConversationsList extends React.Component {
+import { connect } from "react-redux";
+import { Image } from "react-bootstrap";
+export class ConversationsList extends React.Component {
   state = {
     conversations: [],
     activeConversation: null,
   };
 
   componentDidMount = () => {
-    fetch(`http://localhost:3000/conversations`)
+    let token = localStorage.token;
+    fetch(`http://localhost:3000/conversations`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((res) => res.json())
       .then((conversations) => this.setState({ conversations: conversations }));
   };
@@ -33,14 +40,18 @@ class ConversationsList extends React.Component {
     const conversation = conversations.find(
       (conversation) => conversation.id === message.conversation_id
     );
-    conversation.messages = [...conversation.messages, message];
+    conversation.messages = !conversation.messages.find(
+      (m) => m.id === message.id
+    )
+      ? (conversation.messages = [...conversation.messages, message])
+      : conversation.messages;
     this.setState({ conversations });
   };
 
   render = (props) => {
     const { conversations, activeConversation } = this.state;
     return (
-      <div className="conversationsList" style={{ display: "flex" }}>
+      <div className="conversationsList">
         <ActionCable
           channel={{ channel: "ConversationsChannel" }}
           onReceived={this.handleReceivedConversation}
@@ -51,12 +62,16 @@ class ConversationsList extends React.Component {
             handleReceivedMessage={this.handleReceivedMessage}
           />
         ) : null}
-        <div style={{ flex: "auto" }}>
-          <h2>Threads</h2>
-          <ul>
-            {mapConversations(this.state.conversations, this.handleClick)}
-          </ul>
-          <NewConversationForm />
+        <div className="sidebarContainer">
+          <h2>Messages</h2>
+          <div className="message__list">
+            {mapConversations(
+              this.state.conversations,
+              this.handleClick,
+              this.props.user
+            )}
+          </div>
+          {/* <NewConversationForm /> */}
         </div>
         {activeConversation ? (
           <MessagesArea
@@ -65,15 +80,13 @@ class ConversationsList extends React.Component {
               activeConversation
             )}
             user={this.props.user}
-            style={{ flex: "auto" }}
+            className="messagesArea"
           />
         ) : null}
       </div>
     );
   };
 }
-
-export default ConversationsList;
 
 // helpers
 
@@ -83,12 +96,47 @@ const findActiveConversation = (conversations, activeConversation) => {
   );
 };
 
-const mapConversations = (conversations, handleClick) => {
+const mapConversations = (conversations, handleClick, user) => {
   return conversations.map((conversation) => {
+    let time = new Date(
+      conversation.messages.length > 0 &&
+        conversation.messages[conversation.messages.length - 1].created_at
+    );
+    let newTime = time.toString().split(" ");
+    newTime.splice(5, 4, "PST");
+    newTime.splice(0, 4);
+    let conversationUser = conversation.title
+      .split(",")
+      .filter((name) => name !== user.full_name)[0];
     return (
-      <li key={conversation.id} onClick={() => handleClick(conversation.id)}>
-        {conversation.title}
-      </li>
+      <div
+        key={conversation.id}
+        onClick={() => handleClick(conversation.id)}
+        className="sidebarChat"
+      >
+        <div className="avatar-circle">
+          <span className="initials">
+            {conversationUser.split(" ")[0][0]}
+            {conversationUser.split(" ")[1][0]}
+          </span>
+        </div>
+
+        <div className="sidebarChat__info">
+          <strong style={{ fontSize: "1.1em" }}>{conversationUser}</strong>
+          <p>
+            {conversation.messages.length > 0 &&
+              conversation.messages[conversation.messages.length - 1].text}
+          </p>
+          <small>{conversation.messages && newTime.join(" ")}</small>
+        </div>
+      </div>
     );
   });
 };
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.UserLogIn.user,
+  };
+};
+export default connect(mapStateToProps)(ConversationsList);

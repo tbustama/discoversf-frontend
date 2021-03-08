@@ -27,7 +27,7 @@ class NewConversationForm extends React.Component {
   render = () => {
     return (
       <div className="newConversationForm">
-        <form onSubmit={this.handleSubmit}>
+        {/* <form onSubmit={this.handleSubmit}>
           <label>New Conversation:</label>
           <br />
           <input
@@ -36,7 +36,7 @@ class NewConversationForm extends React.Component {
             onChange={this.handleChange}
           />
           <input type="submit" />
-        </form>
+        </form> */}
       </div>
     );
   };

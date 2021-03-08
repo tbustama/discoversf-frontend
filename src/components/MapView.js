@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
   Marker,
+  InfoWindow,
 } from "react-google-maps";
 import { connect } from "react-redux";
 
@@ -27,6 +28,14 @@ const MyMapComponent = withScriptjs(
             lng: parseFloat(props.selectRestaurant.location.split(" ")[1]),
           }}
         />
+        // <InfoWindow
+        //   position={{
+        //     lat: parseFloat(props.selectRestaurant.location.split(" ")[0]),
+        //     lng: parseFloat(props.selectRestaurant.location.split(" ")[1]),
+        //   }}
+        // >
+        //   <h5 id="user-title">{props.selectRestaurant.name}</h5>
+        // </InfoWindow>
       )}
     </GoogleMap>
   ))

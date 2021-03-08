@@ -1,9 +1,26 @@
 import { Card, Button, Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
-import { LinkContainer } from "react-router-bootstrap";
+import { useHistory } from "react-router-dom";
 
 const UserCard = (props) => {
-  console.log(props);
+  let history = useHistory();
+  const handleSubmit = (e, receiver) => {
+    e.preventDefault();
+    const token = localStorage.token;
+    fetch(`http://localhost:3000/conversations`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        title: `${receiver.full_name},${props.loggedInUser.full_name}`,
+        receiver_id: receiver.id,
+        sender_id: props.loggedInUser.id,
+      }),
+    }).then(() => history.push("/forum"));
+  };
   return (
     <Card id="result-users">
       <Row>
@@ -18,13 +35,25 @@ const UserCard = (props) => {
           </Card.Body>
         </Col>
         <Col md={3}>
-          <Button id="rounded-button" variant="outline-primary">
-            Message
-          </Button>
+          {props.user.id !== props.loggedInUser.id && (
+            <Button
+              id="rounded-button"
+              variant="outline-primary"
+              onClick={(e) => {
+                handleSubmit(e, props.user);
+              }}
+            >
+              Message
+            </Button>
+          )}
         </Col>
       </Row>
     </Card>
   );
 };
 
-export default UserCard;
+const mapStateToProps = (state) => {
+  return { loggedInUser: state.UserLogIn.user };
+};
+
+export default connect(mapStateToProps)(UserCard);
