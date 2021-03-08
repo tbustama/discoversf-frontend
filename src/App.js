@@ -15,7 +15,7 @@ import CardsContainer from "./containers/CardsContainer";
 import { fetchRestaurants } from "./Redux/Actions/Restaurants";
 import UserCard from "./components/UserCard";
 import UserEdit from "./components/UserEdit";
-import ConversationsList from "./components/Messaging/ConversationsList";
+import { ConversationsList } from "./components/Messaging/ConversationsList";
 import UserResultsContainer from "./containers/UserResultsContainer";
 import MapView from "./components/MapView";
 class App extends React.Component {

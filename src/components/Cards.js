@@ -65,26 +65,35 @@ const Cards = (props) => {
                     onClick={() => props.userShow(props.restaurant.users)}
                   >
                     {props.restaurant.users.length > 0 &&
-                      `${props.restaurant.users[0].username}`}
+                      `${
+                        props.restaurant.users[0].id == props.loggedInUser.id
+                          ? "You"
+                          : props.restaurant.users[0].username
+                      }`}
                     {props.restaurant.users.length > 1 &&
                       ` and ${
                         props.restaurant.users.length - 1
                       } others are going`}
-                    {props.restaurant.users.length == 1 && " is going"}
+                    {props.restaurant.users.length == 1 &&
+                      props.restaurant.users[0].id !== props.loggedInUser.id &&
+                      " is going"}
+                    {props.restaurant.users.length == 1 &&
+                      props.restaurant.users[0].id == props.loggedInUser.id &&
+                      " are going"}
                   </Nav.Link>
                 </LinkContainer>
 
                 <Nav.Link
                   target="_blank"
                   href={props.restaurant.yelp_url}
-                  style={{ marginLeft: "30%" }}
+                  style={{ marginLeft: "35%" }}
                 >
                   Yelp Link
                 </Nav.Link>
 
                 {props.user && (
                   <Button
-                    style={{ marginLeft: "35%", borderRadius: "10px" }}
+                    style={{ marginLeft: "40%", borderRadius: "10px" }}
                     onClick={() => createLike(props.user, props.restaurant)}
                   >
                     Like
@@ -102,6 +111,7 @@ const mapStateToProps = (state) => {
   return {
     restaurants: state.RestaurantReducer.restaurants,
     mapRestaurant: state.RestaurantReducer.mapRestaurant,
+    loggedInUser: state.UserLogIn.user,
   };
 };
 const mapDispatchToProps = (dispatch) => {
