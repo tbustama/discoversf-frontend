@@ -1,6 +1,5 @@
 import React from "react";
 import { ActionCable } from "react-actioncable-provider";
-import NewConversationForm from "./NewConversationForm";
 import MessagesArea from "./MessagesArea";
 import Cable from "./Cable";
 import { connect } from "react-redux";
@@ -71,7 +70,6 @@ export class ConversationsList extends React.Component {
               this.props.user
             )}
           </div>
-          {/* <NewConversationForm /> */}
         </div>
         {activeConversation ? (
           <MessagesArea
@@ -127,7 +125,7 @@ const mapConversations = (conversations, handleClick, user) => {
             {conversation.messages.length > 0 &&
               conversation.messages[conversation.messages.length - 1].text}
           </p>
-          <small>{conversation.messages && newTime.join(" ")}</small>
+          <small>{conversation.messages.length > 0 && newTime.join(" ")}</small>
         </div>
       </div>
     );

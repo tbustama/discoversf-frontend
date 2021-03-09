@@ -83,13 +83,15 @@ const Cards = (props) => {
                   </Nav.Link>
                 </LinkContainer>
 
-                <Nav.Link
-                  target="_blank"
-                  href={props.restaurant.yelp_url}
-                  style={{ marginLeft: "35%" }}
-                >
-                  Yelp Link
-                </Nav.Link>
+                {props.restaurant.event ? null : (
+                  <Nav.Link
+                    target="_blank"
+                    href={props.restaurant.yelp_url}
+                    style={{ marginLeft: "35%" }}
+                  >
+                    Yelp Link
+                  </Nav.Link>
+                )}
 
                 {props.user && (
                   <Button

@@ -42,6 +42,7 @@ class App extends React.Component {
       .then((r) => r.json())
       .then((restaurants) => this.props.getRestaurant(restaurants));
   };
+
   componentDidMount = () => {
     setTimeout(() => this.props.fadeOut(), 4000);
     const token = localStorage.token;

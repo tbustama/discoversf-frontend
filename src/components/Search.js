@@ -38,7 +38,7 @@ const Search = (props) => {
                   selected={startDate}
                   onChange={(date) => setStartDate(date)}
                   placeholderText="Choose a date"
-                  name="date-picker"
+                  name="date"
                 />
               </Col>
               <Col xs="auto" className="my-1">
@@ -56,7 +56,7 @@ const Search = (props) => {
                   custom
                   name="casual"
                 >
-                  <option value="0">Choose...</option>
+                  <option value="1">Choose...</option>
                   <option value="true">Casual</option>
                   <option value="">Special Occassion</option>
                 </Form.Control>
@@ -79,8 +79,8 @@ const Search = (props) => {
                   <option value="0">Choose...</option>
                   <option value="Marina">Marina</option>
                   <option value="North Beach">North Beach</option>
-                  <option value="Hayes Valley">Hayes Valley</option>
                   <option value="Nob Hill">Nob Hill</option>
+                  <option value="Hayes Valley">Hayes Valley</option>
                 </Form.Control>
               </Col>
               {/* <Col xs="auto" className="my-1">
@@ -95,8 +95,8 @@ const Search = (props) => {
                   placement="bottom"
                   overlay={
                     <Tooltip id={`tooltip-bottom`}>
-                      Select for options of great food places in your area of
-                      choice <br />
+                      Check out the best places to get great food in your area
+                      of choice <br />
                       {"(click these buttons to submit search)"}
                     </Tooltip>
                   }
@@ -115,7 +115,7 @@ const Search = (props) => {
                   placement="bottom"
                   overlay={
                     <Tooltip id={`tooltip-bottom`}>
-                      Select for the best options to get a drink in your
+                      Check out some of the best places to get a drink in your
                       selected area <br />
                       {"(click these buttons to submit search)"}
                     </Tooltip>
