@@ -1,5 +1,6 @@
 const initialState = {
   user: false,
+  cardShow: false,
 };
 
 const UserLogIn = (state = initialState, action) => {

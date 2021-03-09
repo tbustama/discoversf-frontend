@@ -71,7 +71,8 @@ h1 {
 
 .restaurant-card > .card-image {
   transform: scale(1, 0.8);
-  max-height: 500px;
+  max-height: 400px;
+  min-height: 450px;
   /* max-width: 535px; */
   transition: all 0.5s ease;
   -webkit-transition: all 0.5s ease;
@@ -350,4 +351,39 @@ h1 {
   border-radius: 25px;
   border: 0px;
   box-shadow: none;
+}
+
+.userDetails {
+  cursor: crosshair;
+}
+
+.details {
+  cursor: pointer;
+  padding-top: 5px;
+}
+
+.forumCard {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.forumCard__header {
+  background: rgba(45, 45, 46, 0.95);
+  border-bottom-color: rgb(124, 118, 118);
+  min-height: 50px;
+  min-width: 275px;
+}
+.forumCard__body {
+  color: white;
+  background: rgba(45, 45, 46, 0.95);
+  min-height: 100px;
+  min-width: 275px;
+}
+.bs-popover-auto[x-placement^="bottom"] > .arrow::after,
+.bs-popover-bottom > .arrow::after {
+  border-bottom-color: rgba(45, 45, 45, 0.9);
+}
+
+.bs-popover-auto[x-placement^="bottom"] .popover-header::before,
+.bs-popover-bottom .popover-header::before {
+  border-bottom: 0px;
 }

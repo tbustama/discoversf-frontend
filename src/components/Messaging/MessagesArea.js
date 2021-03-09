@@ -1,8 +1,11 @@
 import React from "react";
 import { useRef, useEffect } from "react";
 import NewMessageForm from "./NewMessageForm";
-import { Toast } from "react-bootstrap";
-const MessagesArea = ({ conversation: { id, title, messages }, user }) => {
+import { Toast, OverlayTrigger, Popover } from "react-bootstrap";
+const MessagesArea = ({
+  conversation: { id, title, messages, users },
+  user,
+}) => {
   const messageRef = useRef();
   useEffect(() => {
     if (messageRef.current) {
@@ -11,6 +14,7 @@ const MessagesArea = ({ conversation: { id, title, messages }, user }) => {
       });
     }
   });
+  let otherUser = users.find((u) => u.id !== user.id);
   return (
     <div className="messagesArea">
       <div className="chat__header">
@@ -20,7 +24,25 @@ const MessagesArea = ({ conversation: { id, title, messages }, user }) => {
             {title.split(",").filter((name) => name !== user.full_name)[0]}
           </span>
         </h4>
-        <strong style={{ paddingTop: "5px" }}>Details</strong>
+        <OverlayTrigger
+          trigger="click"
+          key="bottom"
+          placement="bottom"
+          overlay={
+            <Popover className="forumCard">
+              <Popover.Title as="h3" className="forumCard__header">
+                {otherUser.username}
+              </Popover.Title>
+              <Popover.Content className="forumCard__body">
+                <strong>Bio:</strong> <br></br>
+                {otherUser.bio}
+              </Popover.Content>
+            </Popover>
+          }
+          className="userDetails"
+        >
+          <strong className="details">Details</strong>
+        </OverlayTrigger>
       </div>
 
       <ul id="toast-container" ref={messageRef}>
