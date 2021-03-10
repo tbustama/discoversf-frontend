@@ -83,11 +83,6 @@ const Search = (props) => {
                   <option value="Hayes Valley">Hayes Valley</option>
                 </Form.Control>
               </Col>
-              {/* <Col xs="auto" className="my-1">
-                <Button type="submit">
-                  <GoSearch />
-                </Button>
-              </Col> */}
             </Form.Row>
             <Form.Row>
               <Col className="mt-2 d-flex flex-row-reverse">

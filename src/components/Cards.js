@@ -57,32 +57,34 @@ const Cards = (props) => {
                 {props.restaurant.description}
                 <br></br>
                 <br></br>
-                <LinkContainer
-                  to="/results/people"
-                  style={{ textAlign: "center" }}
-                >
-                  <Nav.Link
-                    onClick={() => props.userShow(props.restaurant.users)}
+                {props.loggedInUser && (
+                  <LinkContainer
+                    to="/results/people"
+                    style={{ textAlign: "center" }}
                   >
-                    {props.restaurant.users.length > 0 &&
-                      `${
-                        props.restaurant.users[0].id == props.loggedInUser.id
-                          ? "You"
-                          : props.restaurant.users[0].username
-                      }`}
-                    {props.restaurant.users.length > 1 &&
-                      ` and ${
-                        props.restaurant.users.length - 1
-                      } others are going`}
-                    {props.restaurant.users.length == 1 &&
-                      props.restaurant.users[0].id !== props.loggedInUser.id &&
-                      " is going"}
-                    {props.restaurant.users.length == 1 &&
-                      props.restaurant.users[0].id == props.loggedInUser.id &&
-                      " are going"}
-                  </Nav.Link>
-                </LinkContainer>
-
+                    <Nav.Link
+                      onClick={() => props.userShow(props.restaurant.users)}
+                    >
+                      {props.restaurant.users.length > 0 &&
+                        `${
+                          props.restaurant.users[0].id == props.loggedInUser.id
+                            ? "You"
+                            : props.restaurant.users[0].username
+                        }`}
+                      {props.restaurant.users.length > 1 &&
+                        ` and ${
+                          props.restaurant.users.length - 1
+                        } others are going`}
+                      {props.restaurant.users.length == 1 &&
+                        props.restaurant.users[0].id !==
+                          props.loggedInUser.id &&
+                        " is going"}
+                      {props.restaurant.users.length == 1 &&
+                        props.restaurant.users[0].id == props.loggedInUser.id &&
+                        " are going"}
+                    </Nav.Link>
+                  </LinkContainer>
+                )}
                 {props.restaurant.event ? null : (
                   <Nav.Link
                     target="_blank"
