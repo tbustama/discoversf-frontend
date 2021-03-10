@@ -39,6 +39,7 @@ const Search = (props) => {
                   onChange={(date) => setStartDate(date)}
                   placeholderText="Choose a date"
                   name="date"
+                  className="datepick"
                 />
               </Col>
               <Col xs="auto" className="my-1">

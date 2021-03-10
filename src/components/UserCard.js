@@ -7,7 +7,7 @@ const UserCard = (props) => {
   return (
     <Card
       style={{ width: "30rem" }}
-      className="text-center justify-content-end rounded"
+      className="text-center justify-content-end rounded bioCard"
     >
       {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
       <Card.Body>

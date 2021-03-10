@@ -22,7 +22,7 @@ const UserCard = (props) => {
     }).then(() => history.push("/forum"));
   };
   return (
-    <Card id="result-users">
+    <Card id="result-users" className="bioCard">
       <Row>
         <Col md={9}>
           <Card.Title id="user-title">{props.user.full_name}</Card.Title>

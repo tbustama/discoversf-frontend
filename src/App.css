@@ -167,10 +167,15 @@ h1 {
   padding-right: 0%;
   max-height: 85vh;
   overflow-x: hidden;
+  padding-left: 0%;
+  border-radius: 6px;
+
   /* overflow-y: auto; */
   z-index: 10;
-
-  /* border-radius: 20px; */
+  box-shadow: 3px 0px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+}
+#results-col2 {
+  padding-right: 2%;
 }
 
 #results-row {
@@ -178,10 +183,10 @@ h1 {
 }
 
 #user-title {
-  color: black;
+  /* color: black; */
 }
 .user-card {
-  color: black;
+  /* color: black; */
   opacity: 1;
   padding-top: 0px;
   padding-left: 0%;
@@ -196,6 +201,7 @@ h1 {
   /* overflow: scroll; */
   margin-top: 4%;
   display: flex;
+  box-shadow: 3px 0px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
 }
 .messagesArea {
   overflow-y: auto;
@@ -395,4 +401,22 @@ h1 {
   padding-top: 5%;
   padding-right: 10%;
   text-align: center;
+}
+
+.toast-body {
+  box-shadow: 3px 0px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+}
+
+#inlineFormCustomSelect {
+  box-shadow: 3px 0px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+}
+#maparea {
+  box-shadow: 3px 0px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+  height: 100%;
+  border-radius: 6px;
+}
+
+.bioCard {
+  background-color: rgba(45, 45, 45, 0.9);
+  /* box-shadow: 3px 0px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%); */
 }
