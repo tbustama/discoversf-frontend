@@ -31,7 +31,16 @@ const MessagesArea = ({
           overlay={
             <Popover className="forumCard">
               <Popover.Title as="h3" className="forumCard__header">
-                {otherUser.username}
+                <div
+                  className="avatar-circle"
+                  style={{ flex: "0.25", maxHeight: "53px" }}
+                >
+                  <span className="initials">
+                    {otherUser.full_name.split(" ")[0][0]}
+                    {otherUser.full_name.split(" ")[1][0]}
+                  </span>
+                </div>
+                <div id="otherUser__name">{otherUser.username}</div>
               </Popover.Title>
               <Popover.Content className="forumCard__body">
                 <strong>Bio:</strong> <br></br>
